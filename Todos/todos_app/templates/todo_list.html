@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block page_content %}
+    <h2>Add Todo</h2>
+    <form method="post" action= {% url 'todo_list' %}>
+        {% csrf_token %}
+
+        <label>Description</label><br>
+        <input type="text" name="description"><br>
+
+        <button>Submit</button>
+    </form>
+    <hr>
+    <h2>Todos:</h2>
+    {% for object in object_list %}
+        <li><a href="{% url 'todo_detail' object.pk %}">{{ object.description }}</a></li>
+    {% endfor %}
+{% endblock %}

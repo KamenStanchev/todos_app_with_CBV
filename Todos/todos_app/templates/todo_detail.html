@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block page_content %}
+    <h1>Todo</h1>
+
+    <strong>Status:{{ todo.is_done|yesno:'Done,Todo' }}</strong>
+
+    <p>
+    {{ todo.description }}
+    </p>
+
+    {% if not todo.is_done %}
+        <hr>
+        <form method="post" action="{% url 'todo_update' todo.id %}">
+            {% csrf_token %}
+            <input type="hidden" name="is_done" value="true">
+            <button>Mark as done</button>
+        </form>
+
+    {% endif %}
+
+{% endblock %}
